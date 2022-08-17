@@ -10,15 +10,6 @@ export const MainContainer = styled.div`
   align-items: flex-end;
 `
 
-export const Shadow = styled.div`
-  background-color: #0000003e;
-  width: inherit;
-  height: inherit;
-  position: absolute;
-  top: 0;
-  left: 0;
-`
-
 export const Container = styled.div`
   width: 100%;
   background-color: white;

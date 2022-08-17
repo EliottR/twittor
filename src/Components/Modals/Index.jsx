@@ -5,26 +5,18 @@ import {
   ButtonContainer,
   InterContainer,
   Line,
-  Shadow,
 } from "./Styled"
 import { AiOutlineRetweet } from "react-icons/ai"
 import { RiPencilLine } from "react-icons/ri"
 import { AnimatePresence, motion } from "framer-motion"
+import { Shadow } from "../Shadow/Index"
 
 export const Modal = ({ isShowing, onClickRT, onClick, isRT }) => {
   const ModalRT = () => {
     return (
       <>
         <MainContainer key="modal" as={motion.div}>
-          <Shadow
-            key="shadow"
-            as={motion.div}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={onClick}
-          />
+          <Shadow onClick={onClick} />
           <Container
             key="containerModal"
             as={motion.div}

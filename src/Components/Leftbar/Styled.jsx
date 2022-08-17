@@ -3,16 +3,18 @@ export const MainContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateX(-100%);
+  /* transform: translateX(-100%); */
   background-color: white;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  z-index: 1;
+  /* z-index: 1; */
 `
 
-export const TopContainer = styled.div``
+export const TopContainer = styled.div`
+  z-index: 10;
+`
 
 export const NavContainer = styled.div`
   font-size: 2.25rem;
@@ -20,6 +22,7 @@ export const NavContainer = styled.div`
   justify-content: space-between;
   padding: 1rem 1.5rem 2rem 1.5rem;
   border-top: 0.25px solid gray;
+  z-index: 10;
 `
 
 export const TopUserContainer = styled.div`
@@ -74,14 +77,3 @@ export const Container = styled.div`
   align-items: center;
   font-size: 1.25rem;
 `
-
-// export const Shadow = styled.div`
-//   background-color: #0000003e;
-//   width: 100vw;
-//   height: 100vh;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   z-index: 0;
-//   /* display: none; */
-// `

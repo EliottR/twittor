@@ -6,7 +6,6 @@ import {
   FollowContainer,
   MainContainer,
   NavContainer,
-  // Shadow,
   TopContainer,
   TopUserContainer,
   UserContainer,
@@ -28,9 +27,10 @@ import { MdSwitchAccount } from "react-icons/md"
 // import { IoRocketOutline } from "react-icons/io"
 import { useSelector } from "react-redux"
 import { forwardRef } from "react"
+import { Shadow } from "../Shadow/Index"
 
 //MAIN COMPONENT
-export const Leftbar = forwardRef(({ dragControls }, ref) => {
+export const Leftbar = forwardRef(({ isShowing, onClick }, ref) => {
   const buttonsData = [
     { icon: <RiAccountCircleLine />, text: "Profil" },
     { icon: <RiFileList3Line />, text: "Listes" },
@@ -45,44 +45,55 @@ export const Leftbar = forwardRef(({ dragControls }, ref) => {
 
   const LeftComponent = () => {
     return (
-      <MainContainer ref={ref} key="leftBar" as={motion.div}>
-        <TopContainer>
-          <TopUserContainer>
-            <UserContainer>
-              <img src={user[0].img} alt="" />
-              <UsernameContainer>{user[0].username}</UsernameContainer>
-              <UserIdContainer>@{user[0].userid}</UserIdContainer>
-              <FollowContainer>
-                <div>
-                  <span>{user[0].nbFollowments}</span> abonnements
-                </div>
-                <div>
-                  <span>{user[0].nbFollowers}</span> abonnés
-                </div>
-              </FollowContainer>
-            </UserContainer>
-            <MdSwitchAccount fontSize={"1.5rem"} />
-          </TopUserContainer>
+      <>
+        <Shadow onClick={onClick} />
+        <MainContainer
+          ref={ref}
+          key="leftBar"
+          as={motion.div}
+          initial={{ x: "-100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "-100%" }}
+          transition={{ duration: 0.2 }}
+        >
+          <TopContainer>
+            <TopUserContainer>
+              <UserContainer>
+                <img src={user[0].img} alt="" />
+                <UsernameContainer>{user[0].username}</UsernameContainer>
+                <UserIdContainer>@{user[0].userid}</UserIdContainer>
+                <FollowContainer>
+                  <div>
+                    <span>{user[0].nbFollowments}</span> abonnements
+                  </div>
+                  <div>
+                    <span>{user[0].nbFollowers}</span> abonnés
+                  </div>
+                </FollowContainer>
+              </UserContainer>
+              <MdSwitchAccount fontSize={"1.5rem"} />
+            </TopUserContainer>
 
-          {buttonsData.map((el, key) => {
-            return (
-              <Container key={key}>
-                {el.icon}
-                {el.text}
-              </Container>
-            )
-          })}
-        </TopContainer>
-        <NavContainer>
-          <RiLightbulbLine />
-          <RiQrCodeLine />
-        </NavContainer>
-      </MainContainer>
+            {buttonsData.map((el, key) => {
+              return (
+                <Container key={key}>
+                  {el.icon}
+                  {el.text}
+                </Container>
+              )
+            })}
+          </TopContainer>
+          <NavContainer>
+            <RiLightbulbLine />
+            <RiQrCodeLine />
+          </NavContainer>
+        </MainContainer>
+      </>
     )
   }
 
   return ReactDOM.createPortal(
-    <AnimatePresence>{<LeftComponent />}</AnimatePresence>,
+    <AnimatePresence>{isShowing && <LeftComponent />}</AnimatePresence>,
     document.body
   )
 })

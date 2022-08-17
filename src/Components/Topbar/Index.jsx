@@ -3,21 +3,22 @@ import { Container, UserContainer, LogoContainer } from "./Styled"
 import logo from "../../Assets/twittor.svg"
 import { BsStars } from "react-icons/bs"
 import { useSelector } from "react-redux"
-import { useState } from "react"
+import { useModal } from "../Hooks/Modal/Index"
+import { Leftbar } from "../Leftbar/Index"
 
 export const Topbar = () => {
   const ref = useRef()
 
   const user = useSelector((state) => state.user)
-
-  const [state, setstate] = useState(false)
+  const { isShowing, toggle } = useModal()
 
   const scrollTop = () => {
     ref.current.nextSibling.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const handleClick = () => {
-    setstate(!state)
+    toggle()
+    console.log("oui")
   }
 
   return (
@@ -27,6 +28,7 @@ export const Topbar = () => {
         <LogoContainer onClick={scrollTop} src={logo} alt="logo twittor" />
         <BsStars fontSize={"large"} />
       </Container>
+      <Leftbar isShowing={isShowing} onClick={handleClick} />
     </>
   )
 }
