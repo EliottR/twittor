@@ -1,30 +1,48 @@
-import React, { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Container, UserContainer, LogoContainer } from "./Styled"
 import logo from "../../Assets/twittor.svg"
 import { BsStars } from "react-icons/bs"
-import { useSelector } from "react-redux"
 import { useModal } from "../Hooks/Modal/Index"
 import { Leftbar } from "../Leftbar/Index"
+import { getDownloadURL, getStorage, ref } from "firebase/storage"
+import { UserAuth } from "../../Contexts/AuthContext"
 
 export const Topbar = () => {
-  const ref = useRef()
-
-  const user = useSelector((state) => state.user)
+  console.log("Topbar")
+  const firstRef = useRef()
   const { isShowing, toggle } = useModal()
+  const dbStorage = getStorage()
+  const [isLoading, setLoading] = useState(true)
 
   const scrollTop = () => {
-    ref.current.nextSibling.scrollTo({ top: 0, behavior: "smooth" })
+    firstRef.current.nextSibling.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const handleClick = () => {
     toggle()
-    console.log("oui")
   }
 
-  return (
+  const [pp, setPp] = useState("")
+  const { user } = UserAuth()
+
+  useEffect(() => {
+    const imgRef = ref(dbStorage, `profilePictures/${user.uid}`)
+    getDownloadURL(imgRef)
+      .then((url) => {
+        setPp(url)
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [dbStorage, user.uid])
+
+  return isLoading ? (
+    <></>
+  ) : (
     <>
-      <Container ref={ref}>
-        <UserContainer src={user[0].img} alt="imgUser" onClick={handleClick} />
+      <Container ref={firstRef}>
+        <UserContainer src={pp} alt="imgUser" onClick={handleClick} />
         <LogoContainer onClick={scrollTop} src={logo} alt="logo twittor" />
         <BsStars fontSize={"large"} />
       </Container>

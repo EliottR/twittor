@@ -34,6 +34,10 @@ export const UserContainer = styled.div`
   }
 `
 
+export const DateTime = styled.div`
+  flex-grow: 1;
+`
+
 export const InterContainer = styled.div`
   display: flex;
   width: 80%;
@@ -53,4 +57,13 @@ export const RTContainer = styled.div`
 
 export const FavContainer = styled.div`
   color: ${(props) => (props.fav ? "#f9197f" : "black")};
+`
+
+export const HasRt = styled.div`
+  margin-left: 3rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: gray;
 `

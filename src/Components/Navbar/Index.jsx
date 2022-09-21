@@ -1,4 +1,3 @@
-import React, { forwardRef } from "react"
 import { NavButton } from "../Buttons/NavButton/Index"
 import { Container } from "./Styled"
 
@@ -12,6 +11,7 @@ import {
   RiMessage3Line,
   RiMessage3Fill,
 } from "react-icons/ri"
+import { forwardRef } from "react"
 
 export const Navbar = forwardRef((props, ref) => {
   const data = [
@@ -41,6 +41,8 @@ export const Navbar = forwardRef((props, ref) => {
       )
     })
   }
+
+  console.log("Navbar")
 
   return <Container ref={ref}>{renderData()}</Container>
 })

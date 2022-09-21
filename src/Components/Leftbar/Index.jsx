@@ -22,15 +22,27 @@ import {
   RiUserFollowLine,
   RiLightbulbLine,
   RiQrCodeLine,
+  RiLogoutBoxLine,
 } from "react-icons/ri"
 import { MdSwitchAccount } from "react-icons/md"
 // import { IoRocketOutline } from "react-icons/io"
 import { useSelector } from "react-redux"
 import { forwardRef } from "react"
 import { Shadow } from "../Shadow/Index"
+import { UserAuth } from "../../Contexts/AuthContext"
 
 //MAIN COMPONENT
 export const Leftbar = forwardRef(({ isShowing, onClick }, ref) => {
+  const { user, logout } = UserAuth()
+
+  const handleLogout = async () => {
+    try {
+      await logout()
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
+
   const buttonsData = [
     { icon: <RiAccountCircleLine />, text: "Profil" },
     { icon: <RiFileList3Line />, text: "Listes" },
@@ -39,9 +51,10 @@ export const Leftbar = forwardRef(({ isShowing, onClick }, ref) => {
     { icon: <RiHeadphoneLine />, text: "Spaces" },
     { icon: <RiMoneyDollarBoxLine />, text: "Monétisation" },
     { icon: <RiUserFollowLine />, text: "Demandes d'abonnement" },
+    { icon: <RiLogoutBoxLine />, text: "Déconnexion", fct: handleLogout },
   ]
 
-  const user = useSelector((state) => state.user)
+  // const user = useSelector((state) => state.user)
 
   const LeftComponent = () => {
     return (
@@ -58,7 +71,7 @@ export const Leftbar = forwardRef(({ isShowing, onClick }, ref) => {
         >
           <TopContainer>
             <TopUserContainer>
-              <UserContainer>
+              {/* <UserContainer>
                 <img src={user[0].img} alt="" />
                 <UsernameContainer>{user[0].username}</UsernameContainer>
                 <UserIdContainer>@{user[0].userid}</UserIdContainer>
@@ -70,13 +83,13 @@ export const Leftbar = forwardRef(({ isShowing, onClick }, ref) => {
                     <span>{user[0].nbFollowers}</span> abonnés
                   </div>
                 </FollowContainer>
-              </UserContainer>
+              </UserContainer> */}
               <MdSwitchAccount fontSize={"1.5rem"} />
             </TopUserContainer>
 
             {buttonsData.map((el, key) => {
               return (
-                <Container key={key}>
+                <Container key={key} onClick={el.fct}>
                   {el.icon}
                   {el.text}
                 </Container>
