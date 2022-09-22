@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useRef } from "react"
 import { BottomContainer, Continue, Input, Intro } from "./Styled"
 
@@ -6,7 +7,7 @@ export const UserLogin = ({ onSubmit, user, onChange, onClick }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      inputRef.current.focus()
+      inputRef.focus()
     }, 200)
   }, [])
 
