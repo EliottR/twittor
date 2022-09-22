@@ -4,7 +4,9 @@ import { BottomContainer, Continue, Input, Intro } from "./Styled"
 export const UserLogin = ({ onSubmit, user, onChange, onClick }) => {
   const focusRef = useRef()
   useEffect(() => {
-    focusRef.current.focus()
+    setTimeout(() => {
+      focusRef.current.focus()
+    }, 0.2)
   }, [])
   return (
     <form onSubmit={onSubmit}>
