@@ -5,8 +5,6 @@ import { MainContainer } from "./Styled"
 import { UserLogin } from "../../Components/Login/UserLogin/Index"
 import { useState } from "react"
 import { UserPwd } from "../../Components/Login/UserPwd/Index"
-// import { useDispatch } from "react-redux"
-// import { logIn } from "../../redux"
 import { LogoAbort } from "../../Components/LogoAbort/Index"
 import { UserAuth } from "../../Contexts/AuthContext"
 
@@ -17,11 +15,9 @@ export const Login = ({ isShowing, onClick }) => {
     const [user, setUser] = useState("")
     const [pwd, setPwd] = useState("")
     const [pwdPage, setPwdPage] = useState(false)
-    // const dispatch = useDispatch()
 
     const handleSubmit = async (e) => {
       e.preventDefault()
-      // dispatch(logIn({ user, pwd }))
       try {
         await signIn(user, pwd)
       } catch (e) {

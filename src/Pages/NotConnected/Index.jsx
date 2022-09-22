@@ -19,6 +19,7 @@ import { Login } from "../Login/Index"
 import { useNavigate } from "react-router-dom"
 
 export const NotConnected = () => {
+  console.log("Not Connected")
   const [login, setLogin] = useState(false)
   const navigate = useNavigate()
 

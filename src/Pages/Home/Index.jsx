@@ -28,24 +28,26 @@ export const Home = () => {
 
   useEffect(() => {
     //all twits
-    ;(async () => {
-      const querySnapshot = await getDocs(collection(db, "twits"))
-      twits.current = querySnapshot.docs
+    if (currentUser) {
+      ;(async () => {
+        const querySnapshot = await getDocs(collection(db, "twits"))
+        twits.current = querySnapshot.docs
 
-      //all users & retwits
-      for (const user of querySnapshot.docs) {
-        const docUsers = await getDoc(doc(db, "users", user.data().user))
-        const docRetwits = await getDocs(
-          collection(db, "twits", user.id, "retwits")
-        )
-        retwits.current.push(docRetwits.docs)
+        //all users & retwits
+        for (const user of querySnapshot.docs) {
+          const docUsers = await getDoc(doc(db, "users", user.data().user))
+          const docRetwits = await getDocs(
+            collection(db, "twits", user.id, "retwits")
+          )
+          retwits.current.push(docRetwits.docs)
 
-        users.current.push(docUsers.data())
-      }
+          users.current.push(docUsers.data())
+        }
 
-      setLoading(false)
-    })()
-  }, [db])
+        setLoading(false)
+      })()
+    }
+  }, [db, currentUser])
 
   return currentUser ? (
     isLoading ? (
