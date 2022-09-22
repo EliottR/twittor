@@ -17,12 +17,14 @@ import { useEffect, useRef, useState } from "react"
 
 export const Home = () => {
   console.log("Home")
-  const { user } = UserAuth()
+  const { currentUser } = UserAuth()
+
   const db = getFirestore()
   const [isLoading, setLoading] = useState(true)
   const twits = useRef()
   const users = useRef([])
-  const navRef = useRef()
+  const retwits = useRef([])
+  const navRef = useRef([])
 
   useEffect(() => {
     //all twits
@@ -30,25 +32,33 @@ export const Home = () => {
       const querySnapshot = await getDocs(collection(db, "twits"))
       twits.current = querySnapshot.docs
 
-      //all users
+      //all users & retwits
       for (const user of querySnapshot.docs) {
-        const docSnap = await getDoc(doc(db, "users", user.data().user))
+        const docUsers = await getDoc(doc(db, "users", user.data().user))
+        const docRetwits = await getDocs(
+          collection(db, "twits", user.id, "retwits")
+        )
+        retwits.current.push(docRetwits.docs)
 
-        users.current.push(docSnap.data())
+        users.current.push(docUsers.data())
       }
 
       setLoading(false)
     })()
   }, [db])
 
-  return user ? (
+  return currentUser ? (
     isLoading ? (
       <div>loading...</div>
     ) : (
       <MainContainer as={motion.div}>
         <Topbar />
         <Container>
-          <TwitsList twits={twits.current} users={users.current} />
+          <TwitsList
+            twits={twits.current}
+            users={users.current}
+            retwits={retwits.current}
+          />
         </Container>
         <Navbar ref={navRef} />
         <TwitButton />

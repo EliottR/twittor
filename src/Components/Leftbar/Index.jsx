@@ -26,15 +26,13 @@ import {
 } from "react-icons/ri"
 import { MdSwitchAccount } from "react-icons/md"
 // import { IoRocketOutline } from "react-icons/io"
-import { useSelector } from "react-redux"
 import { forwardRef } from "react"
 import { Shadow } from "../Shadow/Index"
 import { UserAuth } from "../../Contexts/AuthContext"
 
 //MAIN COMPONENT
 export const Leftbar = forwardRef(({ isShowing, onClick }, ref) => {
-  const { user, logout } = UserAuth()
-
+  const { logout } = UserAuth()
   const handleLogout = async () => {
     try {
       await logout()
@@ -53,8 +51,6 @@ export const Leftbar = forwardRef(({ isShowing, onClick }, ref) => {
     { icon: <RiUserFollowLine />, text: "Demandes d'abonnement" },
     { icon: <RiLogoutBoxLine />, text: "Déconnexion", fct: handleLogout },
   ]
-
-  // const user = useSelector((state) => state.user)
 
   const LeftComponent = () => {
     return (
