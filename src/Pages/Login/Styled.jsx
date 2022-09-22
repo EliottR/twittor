@@ -7,4 +7,5 @@ export const MainContainer = styled.div`
   position: absolute;
   top: 0;
   overflow: hidden;
+  scroll-behavior: none;
 `
