@@ -6,7 +6,7 @@ export const UserLogin = ({ onSubmit, user, onChange, onClick }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      inputRef.focus()
+      inputRef.current.focus()
     }, 200)
   }, [])
 
