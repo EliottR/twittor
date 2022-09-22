@@ -1,6 +1,15 @@
+import { useRef } from "react"
 import { BottomContainer, Continue, Input, Intro } from "./Styled"
 
 export const UserLogin = ({ onSubmit, user, onChange, onClick }) => {
+  const inputRef = useRef()
+
+  useEffect(() => {
+    setTimeout(() => {
+      inputRef.focus()
+    }, 200)
+  }, [])
+
   return (
     <form onSubmit={onSubmit}>
       <Intro>
@@ -8,7 +17,7 @@ export const UserLogin = ({ onSubmit, user, onChange, onClick }) => {
         votre @nomdutilisateur
       </Intro>
       <Input
-        autoFocus
+        ref={inputRef}
         type="text"
         name="userinfo"
         id="userinfo"

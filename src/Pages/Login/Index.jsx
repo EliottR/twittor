@@ -26,10 +26,6 @@ export const Login = ({ isShowing, onClick }) => {
       }
     }
 
-    useEffect(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }, [])
-
     return (
       <MainContainer
         as={motion.div}
