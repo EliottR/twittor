@@ -5,7 +5,7 @@ export const MainContainer = styled.div`
   height: 100vh;
   max-height: 100vh;
   background-color: white;
-  position: absolute;
+  position: fixed;
   top: 0;
   overflow: hidden;
 `
