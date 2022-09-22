@@ -7,6 +7,7 @@ import { useState } from "react"
 import { UserPwd } from "../../Components/Login/UserPwd/Index"
 import { LogoAbort } from "../../Components/LogoAbort/Index"
 import { UserAuth } from "../../Contexts/AuthContext"
+import { useEffect } from "react"
 
 export const Login = ({ isShowing, onClick }) => {
   const { signIn } = UserAuth()
@@ -24,6 +25,10 @@ export const Login = ({ isShowing, onClick }) => {
         console.log(e.message)
       }
     }
+
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }, [])
 
     return (
       <MainContainer
