@@ -2,17 +2,32 @@ import { useRef } from "react"
 import { BottomContainer, Continue, Input, Intro } from "./Styled"
 
 export const UserLogin = ({ onSubmit, user, onChange, onClick }) => {
+  console.log("useLogin")
+
   const inputRef = useRef()
 
+  const checkMail = (email) => {
+    return /\S+@\S+\.\S+/.test(email)
+  }
+
+  const handleEnter = (e) => {
+    e.preventDefault()
+    if (e.key === "Enter") {
+      if (checkMail(user)) {
+        onClick()
+      }
+    }
+  }
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onKeyDown={handleEnter}>
       <Intro>
         Pour commencer, entrez votre numéro de téléphone, votre adresse email ou
         votre @nomdutilisateur
       </Intro>
       <Input
         ref={inputRef}
-        type="text"
+        type="email"
         name="userinfo"
         id="userinfo"
         placeholder="Numéro de téléphone, adresse email ou nom..."
@@ -21,7 +36,7 @@ export const UserLogin = ({ onSubmit, user, onChange, onClick }) => {
       />
       <BottomContainer>
         <div>Mot de passe oublié ?</div>
-        <Continue type="submit" onClick={onClick}>
+        <Continue type="button" onClick={onClick}>
           Suivant
         </Continue>
       </BottomContainer>

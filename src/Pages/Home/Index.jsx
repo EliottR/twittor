@@ -17,7 +17,7 @@ import { useEffect, useRef, useState } from "react"
 
 export const Home = () => {
   console.log("Home")
-  const { currentUser } = UserAuth()
+  const { user } = UserAuth()
 
   const db = getFirestore()
   const [isLoading, setLoading] = useState(true)
@@ -28,7 +28,7 @@ export const Home = () => {
 
   useEffect(() => {
     //all twits
-    if (currentUser) {
+    if (user) {
       ;(async () => {
         const querySnapshot = await getDocs(collection(db, "twits"))
         twits.current = querySnapshot.docs
@@ -47,9 +47,9 @@ export const Home = () => {
         setLoading(false)
       })()
     }
-  }, [db, currentUser])
+  }, [db, user])
 
-  return currentUser ? (
+  return user ? (
     isLoading ? (
       <div>loading...</div>
     ) : (

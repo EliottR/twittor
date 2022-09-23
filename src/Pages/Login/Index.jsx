@@ -7,9 +7,9 @@ import { useState } from "react"
 import { UserPwd } from "../../Components/Login/UserPwd/Index"
 import { LogoAbort } from "../../Components/LogoAbort/Index"
 import { UserAuth } from "../../Contexts/AuthContext"
-import { useEffect } from "react"
 
 export const Login = ({ isShowing, onClick }) => {
+  console.log("Login")
   const { signIn } = UserAuth()
 
   const Log = () => {
@@ -48,7 +48,6 @@ export const Login = ({ isShowing, onClick }) => {
             user={user}
             onChange={(e) => setUser(e.target.value)}
             onClick={() => setPwdPage(true)}
-            onSubmit={(e) => e.preventDefault()}
           />
         )}
       </MainContainer>
