@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import { BottomContainer, Continue, Input, Intro } from "./Styled"
 
-export const UserLogin = ({ onSubmit, user, onChange, onClick }) => {
+export const UserLogin = ({ user, onChange, onClick }) => {
   console.log("useLogin")
 
   const inputRef = useRef()
@@ -11,11 +11,11 @@ export const UserLogin = ({ onSubmit, user, onChange, onClick }) => {
   }
 
   const handleEnter = (e) => {
-    e.preventDefault()
     if (e.key === "Enter") {
       if (checkMail(user)) {
         onClick()
       }
+      e.preventDefault()
     }
   }
 
